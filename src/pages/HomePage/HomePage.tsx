@@ -1,10 +1,10 @@
-import { useEffect, useState } from 'react';
-import Post from '../../interfaces/post-interface';
+import { useEffect, useContext } from 'react';
 import { getAllPosts } from '../../services/post-service';
 import PostCard from '../../components/PostCard/PostCard';
+import { PostsContext } from '../../contexts/PostsContextProvider';
 
 const HomePage = () => {
-    const [posts, setPosts] = useState<Post[]>([]);
+    const { posts, setPosts } = useContext(PostsContext);
 
     useEffect(() => {
         getAllPosts()
@@ -14,9 +14,7 @@ const HomePage = () => {
 
     return <>
         <h1>Home</h1>
-        {
-            posts && posts.map((post) => <PostCard key={post.id} post={post} />)
-        }
+        {posts && posts.map((post) => <PostCard key={post.id} post={post} />)}
     </>
 };
 

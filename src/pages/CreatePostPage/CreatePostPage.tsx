@@ -1,15 +1,21 @@
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { postSchema } from '../../schemas/post-schema';
+import { createPost } from '../../services/post-service';
+import { useEffect } from 'react';
 
 const CreatePostPage = () => {
-    const { register, handleSubmit, formState: { errors } } = useForm({
+    const { register, handleSubmit, reset, formState: { errors, isSubmitSuccessful } } = useForm({
         resolver: zodResolver(postSchema),
     });
 
+    useEffect(() => {
+        reset();
+    }, [isSubmitSuccessful]);
+
     return <>
         <h1>Create Post</h1>
-        <form onSubmit={handleSubmit((data) => console.log('Submitted', data))}>
+        <form onSubmit={handleSubmit((data) => createPost(data))}>
             <div>
                 <label htmlFor="title">Title</label>
                 <input type="text" id="title" {...register('title')} />

@@ -1,4 +1,5 @@
 import Post from "../../interfaces/post-interface";
+import { deletePost } from "../../services/post-service";
 
 interface PostCardProps {
     post: Post;
@@ -16,6 +17,7 @@ const PostCard = ({ post }: PostCardProps) => {
         <ul>
             {post.tags.map((tag) => <li key={tag}>{tag}</li>)}
         </ul>
+        <button onClick={() => deletePost(post.id)}>Delete</button>
     </div>
 };
 

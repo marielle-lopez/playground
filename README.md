@@ -2,6 +2,10 @@
 
 ## Changelog
 
+### 19 February 2025
+- Create `PostCard` component to display all posts on the homepage
+- Add basic form with schema validation to allow user to create a post
+
 ### 18 February 2025
 - Set up basic React application
 - Create basic pages for home and creating a post

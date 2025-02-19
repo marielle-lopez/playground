@@ -48,3 +48,13 @@ export const createPost = async (data: CreatePost): Promise<Post> => {
 
     return createdPost;
 };
+
+export const deletePost = async (id: number): Promise<void> => {
+    const response = await fetch(`http://localhost:8080/posts/${id}`, {
+        method: 'DELETE'
+    });
+
+    if (response.status != 204) {
+        throw new Error('Failed to delete post');
+    }
+};

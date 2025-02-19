@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import Post from '../../interfaces/post-interface';
 import { getAllPosts } from '../../services/post-service';
+import PostCard from '../../components/PostCard/PostCard';
 
 const HomePage = () => {
     const [posts, setPosts] = useState<Post[]>([]);
@@ -13,13 +14,9 @@ const HomePage = () => {
 
     return <>
         <h1>Home</h1>
-        <ul>
-            {
-                posts.map((post) => {
-                    return <li key={post.id}>{post.title}</li>
-                })
-            }
-        </ul>
+        {
+            posts && posts.map((post) => <PostCard key={post.id} post={post} />)
+        }
     </>
 };
 

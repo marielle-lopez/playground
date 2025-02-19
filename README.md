@@ -2,6 +2,9 @@
 
 ## Changelog
 
+### 20 February 2025
+- Create `PostsContextProvider` to house `posts` state and corresponding setter, ultimately allowing `posts` state to refresh when a post is deleted
+
 ### 19 February 2025
 - Create `PostCard` component to display all posts on the homepage
 - Add basic form with schema validation to allow user to create a post

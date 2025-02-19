@@ -1,3 +1,4 @@
+import CreatePost from '../interfaces/create-post-interface.ts';
 import Post from '../interfaces/post-interface.ts';
 
 export const getAllPosts = async (): Promise<Post[]> => {
@@ -13,16 +14,30 @@ export const getAllPosts = async (): Promise<Post[]> => {
 
     const posts = await response.json();
 
+    posts.forEach((post: Post) => {
+        post.createdAt = new Date(post.createdAt);
+        post.modifiedAt = new Date(post.modifiedAt);
+    });
+
     return posts;
 };
 
-export const createPost = async (data: Post): Promise<Post> => {
+export const createPost = async (data: CreatePost): Promise<Post> => {
+    const createdAt = new Date();
+    const modifiedAt = new Date();
+
+    const post = {
+        ...data,
+        createdAt,
+        modifiedAt
+    };
+
     const response = await fetch('http://localhost:8080/posts', {
         headers: {
             'Content-Type': 'application/json'
         },
         method: 'POST',
-        body: JSON.stringify(data)
+        body: JSON.stringify(post)
     });
 
     if (response.status != 201) {
@@ -31,5 +46,5 @@ export const createPost = async (data: Post): Promise<Post> => {
 
     const createdPost = await response.json();
 
-    return createdPost
+    return createdPost;
 };

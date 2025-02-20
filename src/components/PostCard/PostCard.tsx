@@ -2,6 +2,7 @@ import { useContext } from "react";
 import Post from "../../interfaces/post-interface";
 import { deletePost, getAllPosts } from "../../services/post-service";
 import { PostsContext } from "../../contexts/PostsContextProvider";
+import { NavLink } from "react-router-dom";
 
 interface PostCardProps {
     post: Post;
@@ -28,6 +29,9 @@ const PostCard = ({ post }: PostCardProps) => {
                     .catch((err) => console.error(err.message)))}>
             Delete
         </button>
+        <NavLink to={`/post/${post.id}`}>
+            <button>Read more</button>
+        </NavLink>
     </div>
 };
 

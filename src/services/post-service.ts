@@ -35,8 +35,6 @@ export const getPost = async (id: number): Promise<Post> => {
 
     const post = await response.json();
 
-    console.log(post);
-
     post.createdAt = new Date(post.createdAt);
     post.modifiedAt = new Date(post.modifiedAt);
 
@@ -46,8 +44,6 @@ export const getPost = async (id: number): Promise<Post> => {
 export const createPost = async (data: CreateOrUpdatePost): Promise<Post> => {
     const createdAt = new Date();
     const modifiedAt = new Date();
-
-    console.log(data.body)
 
     const post = {
         ...data,
@@ -68,8 +64,6 @@ export const createPost = async (data: CreateOrUpdatePost): Promise<Post> => {
     }
 
     const createdPost = await response.json();
-
-    console.log(createdPost);
 
     return createdPost;
 };

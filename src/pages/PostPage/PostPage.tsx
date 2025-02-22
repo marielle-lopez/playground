@@ -1,15 +1,12 @@
-import { useParams } from 'react-router-dom';
-import { useState, useEffect, useContext } from 'react';
+import { NavLink, useParams } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 import Post from '../../interfaces/post-interface';
-import { deletePost, getAllPosts, getPost } from '../../services/post-service';
-import { PostsContext } from '../../contexts/PostsContextProvider';
+import { getPost } from '../../services/post-service';
 
 const PostPage = () => {
     const { id } = useParams();
-    const { setPosts } = useContext(PostsContext);
     const [post, setPost] = useState<Post | null>(null);
     const [loading, setLoading] = useState<boolean>(true);
-    const [editMode, setEditMode] = useState<boolean>(false);
 
     useEffect(() => {
         getPost(Number(id))
@@ -28,7 +25,7 @@ const PostPage = () => {
         {!post && loading &&
             <p>Loading...</p>
         }
-        {post && !editMode &&
+        {post &&
             <>
                 <h1>{post.title}</h1>
                 <p>{post.createdAt.toDateString()}</p>
@@ -40,18 +37,10 @@ const PostPage = () => {
                 <ul>
                     {post.tags.map((tag) => <li key={tag}>{tag}</li>)}
                 </ul>
-                <button onClick={
-                    () => deletePost(post.id)
-                        .then(() => getAllPosts()
-                            .then((res) => setPosts(res))
-                            .catch((err) => console.error(err.message)))}>
-                    Delete
-                </button>
-                <button onClick={() => setEditMode(true)}>Edit</button>
+                <NavLink to={`/editPost`} state={{ post: post }}>
+                    <button>Edit</button>
+                </NavLink>
             </>
-        }
-        {post && editMode &&
-            <p>Edit mode</p>
         }
     </>
 };

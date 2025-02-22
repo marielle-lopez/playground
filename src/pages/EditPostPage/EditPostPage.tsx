@@ -62,19 +62,20 @@ const EditPostPage = () => {
                             ? errors.tags.message.toString()
                             : 'At least one tag is required'}</p>}
                     </div>
-                    <NavLink to={`/post/${post.id}`}>
-                        <button>Cancel</button>
-                    </NavLink>
-                    <button onClick={
-                        () => deletePost(post.id)
-                            .then(() => getAllPosts()
-                                .then((res) => setPosts(res))
-                                .then(() => navigate('/'))
-                                .catch((err) => console.error(err.message)))}>
-                        Delete
-                    </button>
                     <button type="submit">Update post</button>
                 </form>
+
+                <NavLink to={`/post/${post.id}`}>
+                        <button>Cancel</button>
+                </NavLink>
+                <button onClick={
+                    () => deletePost(post.id)
+                        .then(() => getAllPosts()
+                            .then((res) => setPosts(res))
+                            .then(() => navigate('/'))
+                            .catch((err) => console.error(err.message)))}>
+                    Delete
+                </button>
     </>
 };
 

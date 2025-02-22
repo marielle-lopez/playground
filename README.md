@@ -2,6 +2,12 @@
 
 ## Changelog
 
+### 22 February 2025
+- Create `EditPostPage` to provide a page dedicated to editing a specific post
+    - Ensure presented form is prefilled with information of post being edited to enhance user experience
+
+I had some trouble with getting the form prefilled, mainly because the `post` should not, at any point, be `null`, Otherwise, `Zod` would throw a fit. So, I isolated 'Edit mode' into its own page at `/editPost/{id}`, which the user would be able to navigate to by clicking the 'Edit' button. The next speedbump was knowing how to pass the `post` to the edit page when the user arrived to it. I got some good help from this page: [How to Pass Props Through React Router's Link Component](https://ui.dev/react-router-pass-props-to-link).
+
 ### 20 February 2025
 - Create `PostsContextProvider` to house `posts` state and corresponding setter, ultimately allowing `posts` state to refresh when a post is deleted
 - Create `PostPage` to display specific information of a post with a specific ID and add a corresponding route

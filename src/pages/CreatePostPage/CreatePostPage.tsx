@@ -3,8 +3,10 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { postSchema } from '../../schemas/post-schema';
 import { createPost } from '../../services/post-service';
 import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const CreatePostPage = () => {
+    const navigate = useNavigate();
     const { register, handleSubmit, reset, formState: { errors, isSubmitSuccessful } } = useForm({
         resolver: zodResolver(postSchema),
     });
@@ -15,7 +17,10 @@ const CreatePostPage = () => {
 
     return <>
         <h1>Create Post</h1>
-        <form onSubmit={handleSubmit((data) => createPost(data))}>
+        <form onSubmit={handleSubmit((data) => 
+            createPost(data)
+                .then((createdPost) => navigate(`/post/${createdPost.id}`))
+                .catch((error) => console.error(error)))}>
             <div>
                 <label htmlFor="title">Title</label>
                 <input type="text" id="title" {...register('title')} />

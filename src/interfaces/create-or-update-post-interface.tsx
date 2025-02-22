@@ -1,4 +1,4 @@
-interface CreatePost {
+interface CreateOrUpdatePost {
     title: string;
     author: string;
     introduction: string;
@@ -7,4 +7,4 @@ interface CreatePost {
     tags: string[];
 };
 
-export default CreatePost;
+export default CreateOrUpdatePost;

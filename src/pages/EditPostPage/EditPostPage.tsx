@@ -1,5 +1,5 @@
 import { useForm } from 'react-hook-form';
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { postSchema } from "../../schemas/post-schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { deletePost, getAllPosts, updatePost } from '../../services/post-service';
@@ -8,6 +8,7 @@ import { PostsContext } from '../../contexts/PostsContextProvider';
 
 const EditPostPage = () => {
     const location = useLocation();
+    const navigate = useNavigate();
     const { post } = location.state;
     const { setPosts } = useContext(PostsContext);
     const { register, handleSubmit, reset, formState: { errors, isSubmitSuccessful } } = useForm({
@@ -24,7 +25,7 @@ const EditPostPage = () => {
 
     return <>
         <h1>Edit post</h1>
-        <form onSubmit={handleSubmit((data) => updatePost(post.id, data))}>
+        <form onSubmit={handleSubmit((data) => updatePost(post.id, data).then(() => navigate(`/post/${post.id}`)))}>
                     <div>
                         <label htmlFor="title">Title</label>
                         <input type="text" id="title" {...register('title')} />

@@ -1,4 +1,4 @@
-import CreatePost from '../interfaces/create-post-interface.ts';
+import CreateOrUpdatePost from '../interfaces/create-or-update-post-interface.tsx';
 import Post from '../interfaces/post-interface.ts';
 
 export const getAllPosts = async (): Promise<Post[]> => {
@@ -35,15 +35,19 @@ export const getPost = async (id: number): Promise<Post> => {
 
     const post = await response.json();
 
+    console.log(post);
+
     post.createdAt = new Date(post.createdAt);
     post.modifiedAt = new Date(post.modifiedAt);
 
     return post;
 };
 
-export const createPost = async (data: CreatePost): Promise<Post> => {
+export const createPost = async (data: CreateOrUpdatePost): Promise<Post> => {
     const createdAt = new Date();
     const modifiedAt = new Date();
+
+    console.log(data.body)
 
     const post = {
         ...data,
@@ -65,7 +69,36 @@ export const createPost = async (data: CreatePost): Promise<Post> => {
 
     const createdPost = await response.json();
 
+    console.log(createdPost);
+
     return createdPost;
+};
+
+export const updatePost = async (id: number, data: CreateOrUpdatePost): Promise<Post> => {
+    const modifiedAt = new Date();
+
+    const post = {
+        ...data,
+        modifiedAt
+    };
+
+    const response = await fetch(`http://localhost:8080/posts/${id}`, {
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        method: 'PATCH',
+        body: JSON.stringify(post)
+    });
+
+    if (response.status != 200) {
+        throw new Error('Failed to update post');
+    }
+
+    const updatedPost = await response.json();
+
+    console.log(updatedPost);
+
+    return updatedPost;
 };
 
 export const deletePost = async (id: number): Promise<void> => {

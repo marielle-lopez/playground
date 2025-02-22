@@ -90,8 +90,6 @@ export const updatePost = async (id: number, data: CreateOrUpdatePost): Promise<
 
     const updatedPost = await response.json();
 
-    console.log(updatedPost);
-
     return updatedPost;
 };
 

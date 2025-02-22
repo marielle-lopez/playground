@@ -69,6 +69,7 @@ const EditPostPage = () => {
                         () => deletePost(post.id)
                             .then(() => getAllPosts()
                                 .then((res) => setPosts(res))
+                                .then(() => navigate('/'))
                                 .catch((err) => console.error(err.message)))}>
                         Delete
                     </button>

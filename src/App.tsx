@@ -7,6 +7,7 @@ import CreatePostPage from './pages/CreatePostPage/CreatePostPage.tsx';
 import PostPage from './pages/PostPage/PostPage.tsx';
 import NavigationBar from './components/NavigationBar/NavigationBar.tsx';
 import PostsContextProvider from './contexts/PostsContextProvider.tsx';
+import EditPostPage from './pages/EditPostPage/EditPostPage.tsx';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/createPost" element={<CreatePostPage />} />
           <Route path="/post/:id" element={<PostPage />} />
+          <Route path="/editPost" element={<EditPostPage />} />
         </Routes>
       </BrowserRouter>
     </PostsContextProvider>

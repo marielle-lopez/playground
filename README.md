@@ -6,6 +6,7 @@
     - [20 February 2025](#20-february-2025)
     - [19 February 2025](#19-february-2025)
     - [18 February 2025](#18-february-2025)
+- [Links](#links)
 
 ## Goals <a name="goals"></a>
 - [x] Enable a user to view, create, update, and delete posts
@@ -41,3 +42,9 @@ I had some trouble with getting the form prefilled, mainly because the `post` sh
 - Create basic pages for home and creating a post
 - Create `NavigationBar` component and use React Router for page navigation
 - Set up `Post` service to call backend for `post`-related data
+
+# Links <a name="links"></a>
+- [Creating a checklist in a Markdown file](https://www.markdownguide.org/extended-syntax/#task-lists)
+- [Creating a 'Table of Contents' section in a Markdown file](https://stackoverflow.com/a/33433098/19579561)
+- [Passing through a prop in a `<NavLink>` tag](https://ui.dev/react-router-pass-props-to-link)
+- [Using the `useNavigate` hook](https://stackoverflow.com/a/78556974/19579561)
